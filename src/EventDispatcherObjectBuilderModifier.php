@@ -32,9 +32,20 @@ class EventDispatcherObjectBuilderModifier
 
     public function objectMethods($builder)
     {
-        // declare this class for hooks
-        $builder->declareClass('Symfony\Component\EventDispatcher\GenericEvent');
         $builder->declareClass('EventDispatcherAwareModelInterface');
+
+        $script = '';
+        $script .= $this->addGetEventDispatcher($builder);
+        $script .= $this->addSetEventDispatcher($builder);
+
+        return $script;
+    }
+
+    public function queryMethods($builder)
+    {
+        if (!class_exists('EventDispatcherAwareModelInterface')) {
+            $builder->declareClass('EventDispatcherAwareModelInterface');
+        }
 
         $script = '';
         $script .= $this->addGetEventDispatcher($builder);
@@ -45,15 +56,11 @@ class EventDispatcherObjectBuilderModifier
 
     public function addGetEventDispatcher($builder)
     {
-        $builder->declareClass('Symfony\Component\EventDispatcher\EventDispatcher');
-
         return $this->behavior->renderTemplate('objectGetEventDispatcher');
     }
 
     public function addSetEventDispatcher($builder)
     {
-        $builder->declareClass('Symfony\Component\EventDispatcher\EventDispatcherInterface');
-
         return $this->behavior->renderTemplate('objectSetEventDispatcher');
     }
 

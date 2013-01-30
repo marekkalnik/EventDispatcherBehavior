@@ -45,6 +45,12 @@ EOF;
         $this->assertTrue(defined('Post::EVENT_POST_DELETE'));
     }
 
+    public function testQueryMethods()
+    {
+        $this->assertTrue(method_exists('PostQuery', 'getEventDispatcher'));
+        $this->assertTrue(method_exists('PostQuery', 'setEventDispatcher'));
+    }
+
     public function testGetDispatcher()
     {
         $post = new Post();

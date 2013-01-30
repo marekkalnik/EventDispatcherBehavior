@@ -11,6 +11,11 @@ class EventDispatcherBehavior extends Behavior
     private $objectBuilderModifier;
 
     /**
+     * @var EventDispatcherQueryBuilderModifier
+     */
+    private $queryBuilderModifier;
+
+    /**
      * {@inheritdoc}
      */
     public function getObjectBuilderModifier()
@@ -20,5 +25,17 @@ class EventDispatcherBehavior extends Behavior
         }
 
         return $this->objectBuilderModifier;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQueryBuilderModifier()
+    {
+        if (null === $this->queryBuilderModifier) {
+            $this->queryBuilderModifier = new EventDispatcherQueryBuilderModifier($this);
+        }
+
+        return $this->queryBuilderModifier;
     }
 }

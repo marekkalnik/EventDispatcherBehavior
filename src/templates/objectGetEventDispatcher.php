@@ -5,7 +5,7 @@
 static public function getEventDispatcher()
 {
     if (null === self::$dispatcher) {
-        self::setEventDispatcher(new EventDispatcher());
+        self::setEventDispatcher(new \Symfony\Component\EventDispatcher\EventDispatcher());
     }
 
     return self::$dispatcher;

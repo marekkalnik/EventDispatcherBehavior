@@ -1,1 +1,1 @@
-self::getEventDispatcher()->dispatch('<?php echo $eventName ?>', new GenericEvent($this));
+self::getEventDispatcher()->dispatch('<?php echo $eventName ?>', new \Symfony\Component\EventDispatcher\GenericEvent($this));
